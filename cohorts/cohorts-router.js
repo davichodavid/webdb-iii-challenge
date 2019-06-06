@@ -5,13 +5,13 @@ const knexConfig = require("../knexfile");
 const database = knex(knexConfig.development);
 
 router.get("/", (req, res) => {
-  database("cohort")
+  database("cohorts")
     .then(cohort => res.status(200).json(cohort))
     .catch(err => res.status(500).json({ success: false, err }));
 });
 
 router.get("/:id", (req, res) => {
-  database("cohort")
+  database("cohorts")
     .where({ id: req.params.id })
     .then(cohort => {
       if (cohort) {
@@ -37,7 +37,7 @@ router.get("/:id/students", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  database("cohort")
+  database("cohorts")
     .insert(req.body, "id")
     .then(ids => res.status(201).json(ids))
     .catch(err => {
@@ -46,7 +46,7 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  database("zoos")
+  database("cohorts")
     .where({ id: req.params.id })
     .update(req.body)
     .then(cohortUpdated => {
@@ -60,7 +60,7 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  database("cohort")
+  database("cohorts")
     .where({ id: req.params.id })
     .del()
     .then(cohortDeleted => {

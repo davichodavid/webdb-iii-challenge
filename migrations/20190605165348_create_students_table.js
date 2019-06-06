@@ -6,7 +6,11 @@ exports.up = function(knex, Promise) {
       .string("name", 128)
       .notNullable()
       .unique();
-    table.foreign("cohort_id").references("cohorts.id");
+    table
+      .integer("cohort_id")
+      .unsigned()
+      .references("cohorts.id");
+    // .inTable("cohorts");
   });
 };
 
